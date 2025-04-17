@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->date('sale_date');
+            $table->bigInteger('user_id');
+            $table->string('purchase_product');
+            $table->bigInteger('member_id')->nullable();
             $table->integer('total_price');
-            $table->integer('total_pay');
-            $table->integer('total_return');
-            $table->integer('point');
-            $table->integer('total_point');
+            $table->integer('total_payment');
+            $table->integer('change');
+            $table->integer('used_point');
             $table->timestamps();
         });
     }
