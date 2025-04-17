@@ -8,23 +8,23 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 d-flex align-items-center">
                         <li class="breadcrumb-item">
-                            <a href="dashboard" class="link">
+                            <a href="{{ route('employee.dashboard') }}" class="link">
                                 <i class="mdi mdi-home-outline fs-4"></i>
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="" class="link">Purchase</a>
+                            <a href="{{ route('employee.SaleIndex') }}" class="link">Purchase</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="" class="link">Add Purchase</a>
+                            <a href="{{ route('employee.SaleCreate') }}" class="link">Add Purchase</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="" class="link">Payment</a>
+                            <a href="{{ route('employee.SalePayment') }}" class="link">Payment</a>
                         </li>
                         <li class="breadcrumb-item active text-dark" aria-current="page">Invoice</li>
                     </ol>
                 </nav>
-                <h1 class="mb-0 fw-bold">Invoice</h1> 
+                <h1 class="mb-0 fw-bold">Invoice</h1>
             </div>
         </div>
     </div>
@@ -82,22 +82,24 @@
             left: 10px;
             font-size: 12px
         }
-
     </style>
     <div class="row bg-light px-3 py-4 gutters">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card p-4">
                 <div class="card-body p-0">
+                    @if (Session::get('success'))
+                        <div class="alert alert-success">{{ Session::get('success') }}</div>
+                    @endif
                     <div class="invoice-container">
                         <div class="invoice-header">
                             <!-- Row start -->
                             <div class="row gutters">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                     <div class="custom-actions-btns mb-5">
-                                        <a href="" class="btn btn-primary">
+                                        <a href="{{ route('employee.ExportPDF', $sale->id) }}" class="btn btn-primary">
                                             <i class="icon-download"></i> Download
                                         </a>
-                                        <a href="" class="btn btn-secondary">
+                                        <a href="{{ route('employee.SaleIndex') }}" class="btn btn-secondary">
                                             <i class="icon-printer"></i> Back
                                         </a>
                                     </div>
@@ -107,21 +109,22 @@
                                 <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
                                     <div class="invoice-details">
                                         <address>
-                                            
-                                                <b>0881</b><br>
+                                            @if ($sale->customer)
+                                                <b>{{ $sale->customer->phone }}</b><br>
                                                 MEMBER SINCE :
-                                                23-05
+                                                {{-- liya aku nambahin ini yang carbon--}}
+                                                {{ \Carbon\Carbon::parse($sale->customer->created_at)->format('d F Y') }}
                                                 <br>
-                                                MEMBER POIN : 200
-                                            
+                                                MEMBER POIN : {{ $sale->customer->point }}
+                                            @endif
                                         </address>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
                                     <div class="invoice-details">
                                         <div class="invoice-num">
-                                            <div>Invoice - #id</div>
-                                            <div>purchase date : 23-5-2007</div>
+                                            <div>Invoice - #{{ $sale->id }}</div>
+                                            <div>{{ \Carbon\Carbon::parse($sale->sale_date)->format('d F Y') }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -143,26 +146,26 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                
+                                                @foreach ($detail_sale as $data)
                                                     <tr class="service">
                                                         <td class="tableitem">
-                                                            <p class="itemtext">milk</p>
+                                                            <p class="itemtext">{{ $data->product->name }}</p>
                                                         </td>
                                                         <td class="tableitem">
                                                             <p class="itemtext">Rp.
-                                                                20.000
+                                                                {{ number_format($data->product->price, 0, ',', '.') }}
                                                             </p>
                                                         </td>
                                                         <td class="tableitem">
-                                                            <p class="itemtext">23</p>
+                                                            <p class="itemtext">{{ $data->quantity }}</p>
                                                         </td>
                                                         <td class="tableitem">
                                                             <p class="itemtext">Rp.
-                                                                24.000
+                                                                {{ number_format($data->sub_total, 0, ',', '.') }}
                                                             </p>
                                                         </td>
                                                     </tr>
-                                                
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -175,32 +178,32 @@
                                 <div class="invoice-price-row">
                                     <div class="sub-price">
                                         <small>USED POIN</small>
-                                        <span class="text-invers">100</span>
+                                        <span class="text-inverse">{{ $sale->used_point }}</span>
                                     </div>
                                     <div class="sub-price">
                                         <small>CASHIER</small>
-                                        <span class="text-invers">jeno</span>
+                                        <span class="text-inverse">{{ $sale->user->name }}</span>
                                     </div>
                                     <div class="sub-price">
                                         <small>TOTAL PAY</small>
-                                        <span class="text-invers">Rp
-                                            24.000</span>
+                                        <span class="text-inverse">Rp
+                                            {{ number_format($sale->total_payment, 0, ',', '.') }}</span>
                                     </div>
                                     <div class="sub-price">
                                         <small>CHANGE</small>
-                                        <span class="text-invers">Rp
-                                            23.000</span>
+                                        <span class="text-inverse">Rp
+                                            {{ number_format($sale->change, 0, ',', '.') }}</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="invoice-price-right">
                                 <small>TOTAL</small>
-                                
-                                    <h2 class="text-white text-end me-5 text-decoration-line-through">Rp. 200 + 34.000 = 34.200</h2>
-                                    <h2 class="text-white text-end me-5">Rp. 34.000</h2>
-                                
-                                    <h2 class="text-white text-end me-5">Rp. 34.000</h2>
-                                
+                                @if ( $sale->used_point > 0 )
+                                    <h2 class="text-white text-end me-5 text-decoration-line-through">Rp. {{ number_format($sale->total_price + $sale->used_point, 0, ',', '.') }}</h2>
+                                    <h2 class="text-white text-end me-5">Rp. {{ number_format($sale->total_price, 0, ',', '.') }}</h2>
+                                @else
+                                    <h2 class="text-white text-end me-5">Rp. {{ number_format($sale->total_price, 0, ',', '.') }}</h2>
+                                @endif
                             </div>
                         </div>
                     </div>

@@ -12,7 +12,7 @@ class DetailSaleController extends Controller
      */
     public function index()
     {
-        //
+        return view('employee.purchases.print');
     }
 
     /**

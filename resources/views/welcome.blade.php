@@ -32,7 +32,7 @@
     <div class="container">
       <h1 class="display-5 fw-bold">🍇 Fresh Fruits Delivered to Your Door!</h1>
       <p class="lead mb-4">At Hao Fruit Market, we deliver handpicked fresh fruits straight from the farm to your home 🏡.</p>
-      <button href="#" class="btn btn-success btn-md btn-success">🛍️ Shop Now</button>
+      <a href="{{ route('login') }}" class="btn btn-success btn-md">🛍️ Shop Now</a>
     </div>
   </section>
 

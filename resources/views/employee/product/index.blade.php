@@ -8,7 +8,7 @@
                 <div class="col-6">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 d-flex align-items-center">
-                            <li class="breadcrumb-item"><a href="" class="link"><i
+                            <li class="breadcrumb-item"><a href="{{ route('employee.dashboard') }}" class="link"><i
                                         class="mdi mdi-home-outline fs-4"></i></a></li>
                             <li class="breadcrumb-item active text-dark" aria-current="page">Product</li>
                         </ol>
@@ -17,34 +17,39 @@
                 </div>
             </div>
         </div>
+
         <div class="container-fluid">
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+
                             <div class="table-responsive">
                                 <table id="products" class="table table-hover data">
                                     <thead>
                                         <tr>
-                                            <th class="text-dark" scope="col">No</th>
+                                            <th class="text-dark text-center" scope="col">No</th>
                                             <th class="text-dark" scope="col"></th>
                                             <th class="text-dark" scope="col">Name Product</th>
                                             <th class="text-dark" scope="col">Price</th>
-                                            <th class="text-dark" scope="col">Stock</th>
+                                            <th class="text-dark text-center" scope="col">Stock</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+
+                                        @foreach ($products as $data)
                                             <tr>
-                                                <th class="text-center pointer" scope="row">1</th>
+                                                <th class="text-center pointer" scope="row">{{ $loop->iteration }}</th>
                                                 <td class="pointer">
-                                                    <img src="gambar.png" width="75">
+                                                    <img src="{{ asset('storage/' . $data->image) }}"
+                                                        alt="{{ $data->name }}" width="75">
                                                 </td>
-                                                <td class="text-start pointer">milk</td>
-                                                <td class="text-start pointer">Rp. 3.000</td>
-                                                <td class="text-start pointer">233</td>
+                                                <td class="text-start pointer">{{ $data['name'] }}</td>
+                                                <td class="text-start pointer">Rp. {{ number_format($data->price, 0, ',', '.') }}</td>
+                                                <td class="text-center pointer">{{  $data->stock }}</td>
                                             </tr>
-                                        
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -52,26 +57,29 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
     <script>
-    
+        $(document).ready(function() {
+            $("form[id^='form-stock']").submit(function(e) {
+                e.preventDefault();
 
+                let id = $(this).find("[name='id']").val();
+                let oldStock = parseInt($("#stock-" + id).attr("value"));
+                let newStock = parseInt($("#stock-" + id).val());
 
+                if (newStock <= oldStock) {
+                    $("#error-stock-" + id).removeClass("d-none");
+                    return false;
+                }
 
-
-
-
-
-
-
-
-
-
-
-
-
+                $(this).unbind('submit').submit();
+            });
+        });
     </script>
+
 @endsection
 
 @section('scripts')

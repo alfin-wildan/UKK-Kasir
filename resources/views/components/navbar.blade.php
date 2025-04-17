@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,6 +21,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/themify-icons@latest/css/themify-icons.css">
     {{-- <link href="{{ asset('src/DataTables/datatables.min.css') }}" rel="stylesheet">
     <script src="{{ asset('src/DataTables/datatables.min.js') }}"></script> --}}
+
 </head>
 
 <body>
@@ -30,6 +32,7 @@
             <div class="lds-pos"></div>
         </div>
     </div>
+
     <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
         <header class="topbar" data-navbarbg="skin6">
@@ -42,14 +45,16 @@
                         </b>
                         <span class="logo-text">
                             <img src="{{ asset('assets/images/logo-text.png') }} " alt="homepage" class="dark-logo" />
-                            <img src="{{ asset('assets/images/logo-light-text.png') }}" class="light-logo" alt="homepage" />
+                            <img src="{{ asset('assets/images/logo-text.png') }}" class="light-logo" alt="homepage" />
                         </span>
                     </a>
+
                     <!-- This is for the sidebar toggle which is visible on mobile only -->
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
                             class="mdi mdi-menu"></i>
                     </a>
                 </div>
+
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
@@ -58,79 +63,82 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
                                 <button type="button" class="btn btn-light dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i>
-                                                </button>
-                                
-                                    <a class="btn btn-light dropdown-item nav-link" href=" "><i class="ti-arrow-left m-r-5 m-l-5"></i>
+                                    {{ Auth::User()->name }}</button>
+                                @if (Auth::check())
+                                    <a class="btn btn-light dropdown-item nav-link" href="{{ route('logout') }}"><i class="ti-arrow-left m-r-5 m-l-5"></i>
                                     Logout</a>
-                                
+                                @endif
+
                             </ul>
                         </li>
                     </ul>
                 </div>
             </nav>
         </header>
+
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <div class="scroll-sidebar">
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        
-                        
-
+                        @if (Auth::check())
+                            @if (Auth::user()->role == 'admin')
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
-                                        <i class="mdi mdi-view-dashboard"></i>
-                                        <span class="hide-menu">Dashboard</span>
-                                    </a>
-                                </li>   
-                            
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.dashboard') }}" aria-expanded="false">
                                         <i class="mdi mdi-view-dashboard"></i>
                                         <span class="hide-menu">Dashboard</span>
                                     </a>
                                 </li>
-                            
-                        
-                        
-                            
+                            @elseif (Auth::user()->role == 'employee')
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href=" " aria-expanded="false">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('employee.dashboard') }}" aria-expanded="false">
+                                        <i class="mdi mdi-view-dashboard"></i>
+                                        <span class="hide-menu">Dashboard</span>
+                                    </a>
+                                </li>
+                            @endif
+                        @endif
+
+                        @if (Auth::check())
+                            @if (Auth::user()->role == 'admin')
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.ProductHome') }}" aria-expanded="false">
                                         <i class="mdi mdi-store"></i>
                                         <span class="hide-menu">Product</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href=" " aria-expanded="false">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.SaleHome') }}" aria-expanded="false">
                                         <i class="mdi mdi-cart"></i>
                                         <span class="hide-menu">Purchase</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link"  href=" " aria-expanded="false">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link"  href="{{ route('admin.UserHome') }}"aria-expanded="false">
                                         <i class="mdi mdi-account-network"></i>
                                         <span class="hide-menu">User</span>
                                     </a>
                                 </li>
-                            
+                            @else
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href=" " aria-expanded="false">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('employee.ProductIndex') }}" aria-expanded="false">
                                         <i class="mdi mdi-store"></i>
                                         <span class="hide-menu">Product</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href=" " aria-expanded="false">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('employee.SaleIndex') }}" aria-expanded="false">
                                         <i class="mdi mdi-cart"></i>
                                         <span class="hide-menu">Purchase</span>
                                     </a>
                                 </li>
-                            
-                        
+                            @endif
+                        @endif
                     </ul>
                 </nav>
             </div>
         </aside>
+
     @yield('container')
     </div>
     <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }}"></script>
@@ -156,4 +164,5 @@
     @stack('script')
     @yield('scripts')
 </body>
+
 </html>

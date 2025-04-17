@@ -1,5 +1,5 @@
 @extends('components.navbar')
-    
+
 @section('container')
 <div class="page-wrapper">
     <div class="page-breadcrumb">
@@ -7,25 +7,27 @@
             <div class="col-6">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 d-flex align-items-center">
-                        <li class="breadcrumb-item"><a href=" " class="link"><i class="mdi mdi-home-outline fs-4"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" class="link"><i class="mdi mdi-home-outline fs-4"></i></a></li>
+                        {{-- <li class="breadcrumb-item active" aria-current="page">Dashboard</li> --}}
                     </ol>
                 </nav>
-                <h1 class="mb-0 fw-bold">Dashboard</h1> 
+                <h1 class="mb-0 fw-bold">Dashboard</h1>
             </div>
         </div>
     </div>
+
     <div class="container-fluid">
         @if (Session::get('success'))
                 <div class="alert alert-success">{{ Session::get('success') }}</div>
         @endif
         @if(session('message'))
-            <div class="alert alert-danger">{{ session  ('message') }}</div>
+            <div class="alert alert-danger">{{ session('message') }}</div>
         @endif
         <div class="card">
             <div class="card-body">
-                <h3>Welcome Jeno !</h3>
-                <div class="row">
-                    <div class="col-md-8 mt-3">
+                <h3>Welcome {{ Auth::User()->name }}!</h3>
+                <div class="row mt-3">
+                    <div class="col-md-8">
                         <figure class="highcharts-figure">
                             <div id="container"></div>
                         </figure>
@@ -33,7 +35,7 @@
                     <div class="col-4">
                         <figure class="highcharts-figure">
                             <div id="container2"></div>
-                        </figure>                        
+                        </figure>
                     </div>
                 </div>
             </div>
@@ -49,37 +51,38 @@
 
 
 <script>
+    const purchaseData = @json($chartData);
 
-
-
+    const categories = purchaseData.map(item => item.date);
+    const data = purchaseData.map(item => item.total);
 
     Highcharts.chart('container', {
         chart: {
             type: 'column'
         },
         title: {
-            text: 'Corn vs wheat estimated production for 2023'
-        },
-        subtitle: {
-            text:
-                'Source: <a target="_blank" ' +
-                'href="https://www.indexmundi.com/agriculture/?commodity=corn">indexmundi</a>'
+            text: 'Last 30 Days Purchase'
         },
         xAxis: {
-            categories: ['USA', 'China', 'Brazil', 'EU', 'Argentina', 'India'],
+            categories: categories,
             crosshair: true,
-            accessibility: {
-                description: 'Countries'
+            labels: {
+                step: 1,
+                rotation: -45,
+                style: {
+                    fontSize: '12px'
+                }
             }
         },
         yAxis: {
             min: 0,
             title: {
-                text: '1000 metric tons (MT)'
+                text: 'Total Purchase'
             }
         },
         tooltip: {
-            valueSuffix: ' (1000 MT)'
+            headerFormat: '<b>{point.key}</b><br>',
+            pointFormat: 'Total: <b>{point.y}</b>'
         },
         plotOptions: {
             column: {
@@ -87,71 +90,48 @@
                 borderWidth: 0
             }
         },
-        series: [
-            {
-                name: 'Corn',
-                data: [387749, 280000, 129000, 64300, 54000, 34300]
-            },
-            {
-                name: 'Wheat',
-                data: [45321, 140000, 10000, 140500, 19500, 113500]
-            }
-        ]
+        series: [{
+            name: 'Date purchaase',
+            data: data
+        }]
     });
 
+    const pieData = @json($productData);
+
     Highcharts.chart('container2', {
-    chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-    },
-    title: {
-        text: 'Browser market shares in March, 2022'
-    },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    accessibility: {
-        point: {
-            valueSuffix: '%'
-        }
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: false
-            },
-            showInLegend: true
-        }
-    },
-    series: [{
-        name: 'Brands',
-        colorByPoint: true,
-        data: [{
-            name: 'Chrome',
-            y: 74.77,
-            sliced: true,
-            selected: true
-        },  {
-            name: 'Edge',
-            y: 12.82
-        },  {
-            name: 'Firefox',
-            y: 4.63
-        }, {
-            name: 'Safari',
-            y: 2.44
-        }, {
-            name: 'Internet Explorer',
-            y: 2.02
-        }, {
-            name: 'Other',
-            y: 3.28
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'Last 30 Days Purchase Product'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Products',
+            colorByPoint: true,
+            data: pieData
         }]
-    }]
-});
+    });
+
+
 </script>
+
+
 @endsection

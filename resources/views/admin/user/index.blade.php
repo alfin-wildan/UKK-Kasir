@@ -8,7 +8,7 @@
                 <div class="col-6">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 d-flex align-items-center">
-                            <li class="breadcrumb-item"><a href="  " class="link"><i
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" class="link"><i
                                         class="mdi mdi-home-outline fs-4"></i></a></li>
                             <li class="breadcrumb-item active text-dark" aria-current="page">User</li>
                         </ol>
@@ -17,11 +17,14 @@
                 </div>
             </div>
         </div>
+
         <div class="container-fluid">
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+
                             @if (Session::get('success'))
                                 <div class="alert alert-success">{{ Session::get('success') }}</div>
                             @endif
@@ -31,9 +34,11 @@
                             @if (Session::get('failed'))
                                 <div class="alert alert-warning">{{ Session::get('failed') }}</div>
                             @endif
+
                             <div class="d-flex justify-content-end">
-                                <a class="btn btn-primary mb-3" href="user-create">Add User</a>
+                                <a class="btn btn-primary mb-3" href="{{ route('admin.UserCreate') }}">Add User</a>
                             </div>
+
                             <div class="table-responsive">
                                 <table id="user" class="table table-hover data">
                                     <thead>
@@ -46,25 +51,35 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+
+                                        @foreach ($users as $data)
                                             <tr>
-                                                <th class="text-center pointer" scope="row">1</th>
-                                                <td class="text-start pointer">jeno@gmail.com</td>
-                                                <td class="text-start pointer">jeno</td>
-                                                <td class="text-start pointer">cashier</td>
+                                                <th class="text-center pointer" scope="row">{{ $loop->iteration }}</th>
+                                                <td class="text-start pointer">{{ $data['email'] }}</td>
+                                                <td class="text-start pointer">{{ $data['name'] }}</td>
+                                                <td class="text-start pointer">{{ $data['role'] }}</td>
                                                 <td class="justify-content-center">
-                                                    <a href="user-edit-id"
+                                                    <a href="{{ route('admin.UserEdit', $data['id']) }}"
                                                         class="btn btn-warning me-3">Edit</a>
+                                                    @if ($data->role == 'admin')
                                                     <button type="button" class="btn pointer btn-danger text-white"
                                                         data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal-id">
+                                                        data-bs-target="#deleteModal-{{ $data['id'] }}" disabled>
                                                         Delete
                                                     </button>
+                                                    @else
+                                                    <button type="button" class="btn pointer btn-danger text-white"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#deleteModal-{{ $data['id'] }}">
+                                                        Delete
+                                                    </button>
+                                                    @endif
+
                                                 </td>
                                             </tr>
 
                                             {{-- modal delete --}}
-                                            <div class="modal" id="deleteModal-id" tabindex="-1"
+                                            <div class="modal" id="deleteModal-{{ $data['id'] }}" tabindex="-1"
                                                 aria-hidden="true" aria-labelledby="exampleModalToggleLabel1">
                                                 <div class="modal-dialog modal-md modal-dialog-centered">
                                                     <div class="modal-content">
@@ -78,7 +93,7 @@
                                                                     class="d-flex align-items-center justify-content-center gap-3">
                                                                     <h6 class="mb-0 text-md">
                                                                         Are you sure you want to delete this "<span
-                                                                            class="text-danger">jeno</span>"
+                                                                            class="text-danger">{{ $data['name'] }}</span>"
                                                                         permanently?
                                                                     </h6>
                                                                 </div>
@@ -88,7 +103,7 @@
                                                                         Cancel
                                                                     </button>
                                                                     <form
-                                                                        action="delete-id}"
+                                                                        action="{{ route('admin.UserDelete', $data['id']) }}"
                                                                         method="POST">
                                                                         @csrf
                                                                         @method('DELETE')
@@ -101,7 +116,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        
+
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

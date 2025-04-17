@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->date('sale_date');
             $table->bigInteger('user_id');
-            $table->string('purchase_product');
-            $table->bigInteger('member_id')->nullable();
-            $table->integer('total_price');
-            $table->integer('total_payment');
-            $table->integer('change');
+            $table->string('sale_product');
+            $table->bigInteger('customer_id')->nullable();
+            $table->bigInteger('total_price');
+            $table->bigInteger('total_payment');
+            $table->bigInteger('change');
             $table->integer('used_point');
             $table->timestamps();
         });

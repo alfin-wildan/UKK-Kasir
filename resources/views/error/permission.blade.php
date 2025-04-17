@@ -11,7 +11,7 @@
     <meta name="description"
         content="Flexy Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
-    <title>Flexy Admin Lite Template by WrapPixel</title>
+    <title>Hao Fruit Market</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/Flexy-admin-lite/" />
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon.png') }}">
     <link href="{{ asset('assets/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">
@@ -35,17 +35,18 @@
             </div>
         </div> --}}
 
-        <div class="error-box">
+        <div class="error-box mt-5 pt-5">
             <div class="error-body text-center">
                 <h1 class="error-title text-danger">404</h1>
                 <h3 class="text-uppercase error-subtitle">PAGE NOT FOUND !</h3>
                 <p class="text-muted m-t-30 m-b-30">YOU SEEM TO BE TRYING TO FIND HIS WAY HOME</p>
                 <div class="d-block m-auto">
-                    
-                        <a href="" class="btn btn-info mt-3">Back To Home</a>
-                    
-                        <a href="" class="btn btn-info mt-3">Back To Home</a>
-                    
+                    @if (auth()->user()->role == "admin")
+                        <a href="{{ route('admin.dashboard') }}" class="btn btn-info mt-3">Back To Home</a>
+                    @elseif (auth()->user()->role == "employee")
+                        <a href="{{ route('employee.dashboard') }}" class="btn btn-info mt-3">Back To Home</a>
+                    @endif
+
                 </div>
             </div>
         </div>

@@ -7,12 +7,12 @@
             <div class="col-6">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 d-flex align-items-center">
-                        <li class="breadcrumb-item"><a href="" class="link"><i class="mdi mdi-home-outline fs-4"></i></a></li>
-                        <li class="breadcrumb-item" aria-current="page"><a href="" class="link">Product</i></a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" class="link"><i class="mdi mdi-home-outline fs-4"></i></a></li>
+                        <li class="breadcrumb-item" aria-current="page"><a href="{{ route('admin.ProductHome') }}" class="link">Product</i></a></li>
                         <li class="breadcrumb-item active text-dark" aria-current="page">Add Product</li>
                     </ol>
                 </nav>
-                <h1 class="mb-0 fw-bold">Add Product</h1> 
+                <h1 class="mb-0 fw-bold">Add Product</h1>
             </div>
         </div>
     </div>
@@ -21,8 +21,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="product-store " enctype="multipart/form-data" method="POST" class="row g-3">
-
+                        <form action="{{ route('admin.ProductStore') }}" enctype="multipart/form-data" method="POST" class="row g-3">
+                            @csrf
                             @if (Session::get('success'))
                                 <div class="alert alert-success">{{ Session::get('success') }}</div>
                             @endif
@@ -59,7 +59,7 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 </div>
 <script src="{{ asset('js/priceFormatter.js') }}"></script>
 @endsection
