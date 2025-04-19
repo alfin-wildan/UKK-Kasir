@@ -14,7 +14,7 @@ Route::middleware('IsGuest')->group(function () {
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 })->name('landingpage');
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');

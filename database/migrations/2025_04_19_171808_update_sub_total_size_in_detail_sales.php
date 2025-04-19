@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detail_sales', function (Blueprint $table) {
-            $table->id();
-            $table->integer('sale_id');
-            $table->integer('quantity');
-            $table->integer('product_id');
-            $table->decimal('sub_total',20,2);
-            $table->timestamps();
+        Schema::table('detail_sales', function (Blueprint $table) {
+            //
         });
     }
 
@@ -27,8 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('detail_sales', function (Blueprint $table) {
-            // Revert kembali jika rollback
-            $table->bigInteger('sub_total')->change();
+            //
         });
     }
 };

@@ -1,4 +1,4 @@
-@extends('components.navbar')
+     @extends('components.navbar')
 
 @section('container')
     <meta name="csrf-token" content="{{ csrf_token() }}">

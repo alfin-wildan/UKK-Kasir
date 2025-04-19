@@ -114,6 +114,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+        
 
         if ($user->role === 'admin') {
             return redirect()->back()->with('failed', 'User role is admin cannot delete!');

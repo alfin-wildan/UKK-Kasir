@@ -150,34 +150,42 @@ class SaleController extends Controller
     public function store(Request $request)
     {
         $products = $request->products;
-
+    
         if (empty($products)) {
             return redirect()->back()->with('failed', 'Please choose product at least 1.');
         }
-
+    
         $data['products'] = [];
         $data['total'] = 0;
-
+    
         foreach ($products as $product) {
             $product = explode(';', $product);
             $id = $product[0];
             $name = $product[1];
-            $price = $product[2];
-            $quantity = $product[3];
-            $subtotal = $product[4];
-
-            $data['product'][] = [
+    
+            // Bersihkan harga dari simbol dan titik, kemudian convert menjadi integer
+            $price = (float) str_replace(['Rp', '.', ','], '', $product[2]);
+            $quantity = (int) $product[3];
+    
+            // Hitung subtotal
+            $subtotal = $price * $quantity;
+    
+            // Masukkan data produk ke array
+            $data['product`'][] = [
                 'product_id' => $id,
                 'name' => $name,
                 'price' => $price,
                 'quantity' => $quantity,
                 'sub_total' => $subtotal,
             ];
+    
             $data['total'] += $subtotal;
         }
-        // dd($data['proucts']);
+    
+        // Tampilkan view dengan data produk
         return view('employee.purchases.payment', $data);
     }
+    
 
     public function Member(Request $request, $id)
     {

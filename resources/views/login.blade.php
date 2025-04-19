@@ -38,13 +38,13 @@
     }
 
     .login-form-section h1 {
-        color: #29b6f6;
+        color:rgb(200, 200, 200);
         margin-bottom: 30px;
         text-align: center;
         font-weight: 700;
     }
     .login-form-section h5 {
-        color: #29b6f6;
+        color:rgb(200, 200, 200);
         margin-bottom: 30px;
         text-align: center;
         font-weight: 700;
@@ -65,7 +65,7 @@
     }
 
     .form-control:focus {
-        border-color: #29b6f6;
+        border-color:rgb(200, 200, 200);
         box-shadow: 0 0 0 0.2rem rgba(41, 182, 246, 0.3);
     }
 
@@ -83,7 +83,7 @@
     }
 
     .btn-primary {
-        background: linear-gradient(135deg, #81d4fa, #29b6f6);
+        background: linear-gradient(135deg, #81d4fa, rgb(200, 200, 200));
         border: none;
         border-radius: 14px;
         padding: 12px;
@@ -102,7 +102,7 @@
 
     .login-image-section {
         flex: 1 1 500px;
-        background: #b2ebf2;
+        background:rgb(181, 181, 181);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -182,10 +182,7 @@
             </form>
         </div>
 
-        <!-- Gambar -->
-        <div class="login-image-section">
-            <img src="{{ asset('assets/images/store.jpeg') }}" alt="Login Image" class="login-image"> <!-- Ganti sesuai file -->
-        </div>
+     
     </div>
 
 </body>
