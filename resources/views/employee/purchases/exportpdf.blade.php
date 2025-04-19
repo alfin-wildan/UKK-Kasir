@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Struk Penjualan - Hao</title>
+  <title>Struk Penjualan -</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -97,7 +97,7 @@
 
 <body>
 @php
-        $imagePath = public_path('assets/images/Ice.png');
+        $imagePath = public_path('assets/images/store.jpeg');
         $imageData = base64_encode(file_get_contents($imagePath));
         $src = 'data:' . mime_content_type($imagePath) . ';base64,' . $imageData;
     @endphp
@@ -111,12 +111,12 @@
         </div>
 
 
-    <h2>Frosty Mart</h2>
+    <h2>Finzz Store</h2>
 
     <div class="store-info">
       <small>
-        Telp: 081234567<br>
-        Jl. Raya Wangun No.123
+        Telp: 081234098765<br>
+        Jl. Raya Puncak
       </small>
     </div>
 
@@ -176,7 +176,7 @@
 
     <div id="legalcopy">
       <p class="legal">Invoice: #{{ $sale->id }}</p>
-      <p class="legal">~ Terima kasih atas pembelian Anda ~</p>
+      <p class="legal">~ Terima kasih  ~</p>
     </div>
   </div>
 </body>

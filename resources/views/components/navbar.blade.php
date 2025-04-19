@@ -12,7 +12,7 @@
     <meta name="description"
         content="Flexy Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
-    <title>Frosty Mart</title>
+    <title>Finzz Store</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/Flexy-admin-lite/" />
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/Ice.png') }}">
     <link href="{{ asset('assets/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">
@@ -40,8 +40,8 @@
                 <div class="navbar-header" data-logobg="skin6">
                     <a class="navbar-brand" href="index.html">
                        <b class="logo-icon">
-                    <img src="{{ asset('assets/images/Ice.png') }}" alt="logo" class="dark-logo" style="width: 40px;" />
-                    <img src="{{ asset('assets/images/Ice.png') }}" alt="logo" class="light-logo" style="width: 40px;" />Frosty Mart</b>
+                    <img src="{{ asset('assets/images/store.jpeg') }}" alt="logo" class="dark-logo" style="width: 40px;" />
+                    <img src="{{ asset('assets/images/store.jpeg') }}" alt="logo" class="light-logo" style="width: 40px;" />Finzz Store</b>
 
 
                     <!-- This is for the sidebar toggle which is visible on mobile only -->

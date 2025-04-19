@@ -144,7 +144,7 @@
         <!-- Form Login -->
         <div class="login-form-section">
             <h1>Login</h1>
-            <h5>Frosty Mart</h5>
+            <h5>Finzz Store</h5>
 
             @if (Session::get('failed'))
                 <div class="alert alert-warning">{{ Session::get('failed') }}</div>
@@ -184,7 +184,7 @@
 
         <!-- Gambar -->
         <div class="login-image-section">
-            <img src="{{ asset('assets/images/Ice.png') }}" alt="Login Image" class="login-image"> <!-- Ganti sesuai file -->
+            <img src="{{ asset('assets/images/store.jpeg') }}" alt="Login Image" class="login-image"> <!-- Ganti sesuai file -->
         </div>
     </div>
 

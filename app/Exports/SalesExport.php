@@ -74,7 +74,7 @@ class SalesExport implements FromCollection, WithHeadings, WithMapping, WithStyl
 
     // Judul
     $sheet->mergeCells('A1:H1');
-    $sheet->getCell('A1')->setValue('Data Penjualan Frostymart');
+    $sheet->getCell('A1')->setValue('Data Penjualan FinzzStore');
     $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14)->getColor()->setARGB('FFFFFF');
     $sheet->getStyle('A1')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('4F81BD'); // Warna biru yang lebih gelap agar kontras
     $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
