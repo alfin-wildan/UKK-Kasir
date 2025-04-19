@@ -12,9 +12,9 @@
     <meta name="description"
         content="Flexy Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
-    <title>Hao Fruit Market</title>
+    <title>Frosty Mart</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/Flexy-admin-lite/" />
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/Ice.png') }}">
     <link href="{{ asset('assets/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css') }}" rel="stylesheet">
     <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
@@ -39,15 +39,10 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <div class="navbar-header" data-logobg="skin6">
                     <a class="navbar-brand" href="index.html">
-                        <b class="logo-icon">
-                            <img src="{{ asset('assets/images/logo-icon.png') }}" alt="homepage" class="dark-logo" />
-                            <img src="{{ asset('assets/images/logo-light-icon.png') }}" alt="homepage" class="light-logo" />
-                        </b>
-                        <span class="logo-text">
-                            <img src="{{ asset('assets/images/logo-text.png') }} " alt="homepage" class="dark-logo" />
-                            <img src="{{ asset('assets/images/logo-text.png') }}" class="light-logo" alt="homepage" />
-                        </span>
-                    </a>
+                       <b class="logo-icon">
+                    <img src="{{ asset('assets/images/Ice.png') }}" alt="logo" class="dark-logo" style="width: 40px;" />
+                    <img src="{{ asset('assets/images/Ice.png') }}" alt="logo" class="light-logo" style="width: 40px;" />Frosty Mart</b>
+
 
                     <!-- This is for the sidebar toggle which is visible on mobile only -->
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
@@ -59,7 +54,7 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ asset('assets/images/users/profile.png') }}" alt="user" class="rounded-circle" width="31">
+                                <img src="{{ asset('assets/images/users/d3.jpg') }}" alt="user" class="rounded-circle" width="31">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
                                 <button type="button" class="btn btn-light dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i>
@@ -110,7 +105,7 @@
                                 <li class="sidebar-item">
                                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.SaleHome') }}" aria-expanded="false">
                                         <i class="mdi mdi-cart"></i>
-                                        <span class="hide-menu">Purchase</span>
+                                        <span class="hide-menu">Penjualan</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
@@ -129,7 +124,7 @@
                                 <li class="sidebar-item">
                                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('employee.SaleIndex') }}" aria-expanded="false">
                                         <i class="mdi mdi-cart"></i>
-                                        <span class="hide-menu">Purchase</span>
+                                        <span class="hide-menu">Penjualan</span>
                                     </a>
                                 </li>
                             @endif

@@ -13,13 +13,13 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('employee.SaleIndex') }}" class="link">Purchase</a>
+                            <a href="{{ route('employee.SaleIndex') }}" class="link">Penjualan</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('employee.SaleCreate') }}" class="link">Add Purchase</a>
+                            <a href="{{ route('employee.SaleCreate') }}" class="link">Tambah Penjualan</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('employee.SalePayment') }}" class="link">Payment</a>
+                            <a href="{{ route('employee.SalePayment') }}" class="link">Pembayaran</a>
                         </li>
                         <li class="breadcrumb-item active text-dark" aria-current="page">Member</li>
                     </ol>

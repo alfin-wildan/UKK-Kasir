@@ -11,10 +11,10 @@
                         <ol class="breadcrumb mb-0 d-flex align-items-center">
                             <li class="breadcrumb-item"><a href="{{ route('employee.dashboard') }}" class="link"><i
                                         class="mdi mdi-home-outline fs-4"></i></a></li>
-                            <li class="breadcrumb-item active text-dark" aria-current="page">Purchase</li>
+                            <li class="breadcrumb-item active text-dark" aria-current="page">Penjualan</li>
                         </ol>
                     </nav>
-                    <h1 class="mb-0 fw-bold">Purchase</h1>
+                    <h1 class="mb-0 fw-bold">Penjualan</h1>
                 </div>
             </div>
         </div>
@@ -31,24 +31,33 @@
                             @endif
 
                             <div class="d-flex align-items-center mb-3">
-                                {{-- <a class="btn btn-info text-white" href="{{ route('employee.Excel') }}">Export Purchase data (.xlsx)</a> --}}
+                                {{-- <a class="btn btn-info text-white" href="{{ route('employee.Excel') }}">Export Penjualan (.xlsx)</a> --}}
 
                                 <form class="d-flex align-items-center mb-3" method="GET" action="{{ route('employee.SaleIndex') }}">
-                                    <select name="filter" class="form-select me-2" style="width: 200px">
-                                        <option value="">Choose Filter</option>
-                                        <option value="daily" {{ request('filter') == 'daily' ? 'selected' : '' }}>Today</option>
-                                        <option value="weekly" {{ request('filter') == 'weekly' ? 'selected' : '' }}>This Week</option>
-                                        <option value="monthly" {{ request('filter') == 'monthly' ? 'selected' : '' }}>This Month</option>
-                                    </select>
-                                    <button type="submit" class="btn btn-secondary me-2">Apply Filter</button>
+    <select name="filter" class="form-select me-2" style="width: 200px">
+        <option value="">Pilih Filter Data </option>
+        <option value="daily" {{ request('filter') == 'daily' ? 'selected' : '' }}>Hari ini</option>
+        <option value="weekly" {{ request('filter') == 'weekly' ? 'selected' : '' }}>Minggu ini</option>
+        <option value="monthly" {{ request('filter') == 'monthly' ? 'selected' : '' }}>Bulan ini </option>
+        <option value="yearly" {{ request('filter') == 'yearly' ? 'selected' : '' }}>Tahun ini</option>
+    </select>
+    @if(request('filter') == 'monthly')
+        <select name="year" class="form-select me-2" style="width: 200px">
+            <option value="{{ now()->year }}" {{ request('year') == now()->year ? 'selected' : '' }}>{{ now()->year }}</option>
+            <option value="{{ now()->year - 1 }}" {{ request('year') == (now()->year - 1) ? 'selected' : '' }}>{{ now()->year - 1 }}</option>
+            <option value="{{ now()->year + 1 }}" {{ request('year') == (now()->year + 1) ? 'selected' : '' }}>{{ now()->year + 1 }}</option>
+        </select>
+    @endif
+    <button type="submit" class="btn btn-secondary me-2">Apply</button>
 
-                                    <button formaction="{{ route('employee.Excel') }}" type="submit" class="btn btn-info text-white">
-                                        Export Purchase (.xlsx)
-                                    </button>
-                                </form>
+    <button formaction="{{ route('employee.Excel') }}" type="submit" class="btn btn-info text-white">
+        Export Penjualan (.xlsx)
+    </button>
+</form>
+
 
                                 <div class="ms-auto">
-                                    <a class="btn btn-primary" href="{{ route('employee.SaleCreate') }}">Add Purchase</a>
+                                    <a class="btn btn-primary" href="{{ route('employee.SaleCreate') }}">Tambah Penjualan</a>
                                 </div>
                             </div>
 
@@ -58,10 +67,10 @@
                                     <thead>
                                         <tr>
                                             <th class="text-dark" scope="col">No</th>
-                                            <th class="text-dark text-start " scope="col">Customer Name</th>
-                                            <th class="text-dark text-start" scope="col">Purchase Date</th>
-                                            <th class="text-dark text-start" scope="col">Total Price</th>
-                                            <th class="text-dark text-start" scope="col">Created By</th>
+                                            <th class="text-dark text-start " scope="col">Name</th>
+                                            <th class="text-dark text-start" scope="col">Tanggal Penjualan</th>
+                                            <th class="text-dark text-start" scope="col">Total Harga</th>
+                                            <th class="text-dark text-start" scope="col">Dibuat Oleh</th>
                                             <th class="text-dark text-start" scope="col"></th>
                                         </tr>
                                     </thead>
@@ -77,15 +86,15 @@
                                                     @endif
                                                     <td class="text-start pointer">{{ $data->sale_date }}</td>
                                                     <td class="text-start pointer">Rp. {{ number_format($data->total_price, 0, ',' , '.') }}</td>
-                                                    <td class="text-start pointer">{{ $data->user->name }}</td>
+                                                    <td class="text-start pointer">{{ $data->customer->name ?? 'NON-MEMBER' }}</td>
                                                     <td class="justify-content-center">
                                                         <button type="button" class="btn pointer btn-warning text-white"
                                                             data-bs-toggle="modal" data-bs-target="#seeModal-{{ $data['id'] }}">
-                                                            See
+                                                            Lihat
                                                         </button>
                                                         <a type="button" class="btn pointer btn-info text-white"
                                                             href="{{ route('employee.ExportPDF', $data->id) }}">
-                                                            Download Invoice
+                                                            Unduh
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -151,7 +160,7 @@
                                                 <!-- Created Info -->
                                                 <div class="text-center mt-3">
                                                     <small>Created At : {{ $sales->created_at->format('Y-m-d H:i:s') }}</small><br>
-                                                    <small>By : {{ $sales->user->name }}</small>
+                                                    <small>By : {{ $sales->user->name  ?? 'NON-MEMBER' }}</small>
                                                 </div>
                                             </div>
 

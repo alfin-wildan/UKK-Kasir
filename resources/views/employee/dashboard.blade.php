@@ -30,11 +30,11 @@
                 <div class="card d-block m-auto text-center">
                     <div class="card-body">
                         <div class=" card-header">
-                            <p class="mb-0">Total Purchase Today</p>
+                            <p class="mb-0">Total Penjualan Hari ini</p>
                         </div>
                         <div class="card-body">
                             <h3 class="card-title">{{ $salesCountToday }}</h3>
-                            <p class="card-text">Total Purchase for today.</p>
+                            <p class="card-text">Total Penjualan untuk hari ini.</p>
                         </div>
                         <div class="card-footer text-muted ">
                             <p>Latest Transaction : {{ $latestTransaksi ? \Carbon\Carbon::parse($latestTransaksi->created_at)->format('d M Y H:i') : 'There is no transaction' }}</p>

@@ -9,10 +9,10 @@
                     <ol class="breadcrumb mb-0 d-flex align-items-center">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" class="link"><i class="mdi mdi-home-outline fs-4"></i></a></li>
                         <li class="breadcrumb-item" aria-current="page"><a href="{{ route('admin.ProductHome') }}" class="link">Product</i></a></li>
-                        <li class="breadcrumb-item active text-dark" aria-current="page">Add Product</li>
+                        <li class="breadcrumb-item active text-dark" aria-current="page">Tambah Product</li>
                     </ol>
                 </nav>
-                <h1 class="mb-0 fw-bold">Add Product</h1>
+                <h1 class="mb-0 fw-bold">Tambah Product</h1>
             </div>
         </div>
     </div>

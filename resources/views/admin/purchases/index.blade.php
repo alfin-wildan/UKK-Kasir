@@ -30,10 +30,10 @@
                                     <thead>
                                         <tr>
                                             <th class="text-dark" scope="col">No</th>
-                                            <th class="text-dark text-start " scope="col">Customer Name</th>
-                                            <th class="text-dark text-start" scope="col">Purchase Date</th>
-                                            <th class="text-dark text-start" scope="col">Total Price</th>
-                                            <th class="text-dark text-start" scope="col">Created By</th>
+                                            <th class="text-dark text-start " scope="col">Nama Pelanggan</th>
+                                            <th class="text-dark text-start" scope="col">Tanggal Penjualan</th>
+                                            <th class="text-dark text-start" scope="col">Total Harga</th>
+                                            <th class="text-dark text-start" scope="col">Dibuat Oleh</th>
                                             <th class="text-dark text-start" scope="col"></th>
                                         </tr>
                                     </thead>
@@ -54,11 +54,11 @@
                                                     <button type="button" class="btn pointer btn-warning text-white"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#seeModal-{{ $data['id'] }}">
-                                                        See
+                                                        Lihat
                                                     </button>
                                                     <a type="button" class="btn pointer btn-info text-white"
                                                         href="{{ route('admin.exportPDFAd', $data->id ?? 'undefined') }}">
-                                                        Download Invoice
+                                                        Unduh
                                                     </a>
                                                 </td>
                                             </tr>
@@ -85,7 +85,7 @@
                                                         <p class="mb-1">Point Member : <strong>{{ $sales->customer ? $sales->customer->point : '-' }}</strong></p>
                                                     </div>
                                                     <div class="text-end">
-                                                        <p class="mb-1">Member Since : <strong>{{ $sales->customer ? \Carbon\Carbon::parse($sales->customer->created_at)->format('d F Y') : '-' }}</strong></p>
+                                                        <p class="mb-1">Bergabung Sejak : <strong>{{ $sales->customer ? \Carbon\Carbon::parse($sales->customer->created_at)->format('d F Y') : '-' }}</strong></p>
                                                     </div>
                                                 </div>
 

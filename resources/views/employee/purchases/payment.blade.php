@@ -13,15 +13,15 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('employee.SaleIndex') }}" class="link"> Sale</a>
+                            <a href="{{ route('employee.SaleIndex') }}" class="link"> Penjualan</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('employee.SaleCreate') }}" class="link">Add Purchase</a>
+                            <a href="{{ route('employee.SaleCreate') }}" class="link">Tambah Penjualan</a>
                         </li>
-                        <li class="breadcrumb-item active text-dark" aria-current="page">Payment</li>
+                        <li class="breadcrumb-item active text-dark" aria-current="page">Pembayaran</li>
                     </ol>
                 </nav>
-                <h1 class="mb-0 fw-bold">Payment</h1>
+                <h1 class="mb-0 fw-bold">Pembayaran</h1>
             </div>
         </div>
     </div>
@@ -36,7 +36,7 @@
 
                             <div class="row">
                                 <div class="col-lg-6 mb-3">
-                                    <h4 class="fw-bold mb-4">Selected Product</h4>
+                                    <h4 class="fw-bold mb-4">Product yang dipilih</h4>
 
                                     @foreach ($product as $item)
                                         <div class="d-flex justify-content-between align-items-start mt-2">
@@ -63,7 +63,7 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <label for="member" class="form-label">Member Status</label>
-                                            <small class="text-danger">Can create member</small>
+                                            <small class="text-danger">Bisa bikin member</small>
                                             <select name="customer" id="customer" class="form-select"
                                                 onchange="memberDetect()">
                                                 <option value="Non-Member">Non-Member</option>
@@ -76,20 +76,20 @@
                                     <div id="member-wrap" class="d-none mb-3">
                                         <div class="d-flex justify-content-between">
                                             <label class="fw-medium">Number Phone Member</label>
-                                            <small class="text-danger">(Regist / Use Member)</small>
+                                            <small class="text-danger">(Daftar / Gunakan Member)</small>
                                         </div>
                                         <input type="text" name="phone" id="phone" class="form-control mt-1">
                                     </div>
 
                                     <!-- Input pembayaran (sama untuk member dan non-member) -->
                                     <div class="mb-3">
-                                        <label class="fw-medium" for="total_payment" >Total Payment</label>
+                                        <label class="fw-medium" for="total_payment" >Total Pembelian</label>
                                         <input type="text" id="total_payment" name="total_payment" class="form-control" required>
                                         <small id="warningMessage" class="text-danger d-none">Jumlah bayar kurang.</small>
                                     </div>
 
                                     <div class="text-end mt-4">
-                                        <button type="submit" id="submitButton" class="btn btn-primary px-4">Order</button>
+                                        <button type="submit" id="submitButton" class="btn btn-primary px-4">Pesan</button>
                                     </div>
                                 </div>
                             </div>

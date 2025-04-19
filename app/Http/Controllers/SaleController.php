@@ -26,14 +26,20 @@ class SaleController extends Controller
          $query = Sale::with(['customer', 'user']);
 
          if ($filter === 'daily') {
-             $query->whereDate('sale_date', Carbon::now());
-         } elseif ($filter === 'weekly') {
-             $startOfWeek = Carbon::now()->startOfWeek(Carbon::MONDAY)->startOfDay();
-             $endOfWeek = Carbon::now()->endOfWeek(Carbon::SUNDAY)->endOfDay();
-             $query->whereBetween('sale_date', [$startOfWeek, $endOfWeek]);
-         } elseif ($filter === 'monthly') {
-             $query->whereMonth('sale_date', Carbon::now()->month);
-         }
+            $query->whereDate('sale_date', Carbon::now());
+        } elseif ($filter === 'weekly') {
+            $startOfWeek = Carbon::now()->startOfWeek(Carbon::MONDAY)->startOfDay();
+            $endOfWeek = Carbon::now()->endOfWeek(Carbon::SUNDAY)->endOfDay();
+            $query->whereBetween('sale_date', [$startOfWeek, $endOfWeek]);
+        } elseif ($filter === 'monthly') {
+            // Jika ada tahun yang dipilih, gunakan tahun itu, jika tidak, gunakan tahun saat ini
+            $year = request('year') ?? Carbon::now()->year;
+            $query->whereYear('sale_date', $year)
+                  ->whereMonth('sale_date', Carbon::now()->month);
+        } elseif ($filter === 'yearly') {
+            $query->whereYear('sale_date', Carbon::now()->year);
+        }
+        
 
          $sale = $query->get();
          $detail_sale = Detail_sale::with('product')->get();

@@ -36,7 +36,7 @@
                             @endif
 
                             <div class="d-flex justify-content-end">
-                                <a class="btn btn-primary mb-3" href="{{ route('admin.UserCreate') }}">Add User</a>
+                                <a class="btn btn-primary mb-3" href="{{ route('admin.UserCreate') }}">Tambah User</a>
                             </div>
 
                             <div class="table-responsive">

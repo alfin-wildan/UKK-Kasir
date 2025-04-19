@@ -36,7 +36,7 @@
                             @endif
 
                             <div class="d-flex justify-content-end">
-                                <a class="btn btn-primary mb-3" href="{{ route('admin.ProductCreate') }}">Add Product</a>
+                                <a class="btn btn-primary mb-3" href="{{ route('admin.ProductCreate') }}">Tambah Product</a>
                             </div>
                             <div class="table-responsive">
                                 <table id="products" class="table table-hover data">
@@ -44,8 +44,8 @@
                                         <tr>
                                             <th class="text-dark" scope="col">No</th>
                                             <th class="text-dark" scope="col"></th>
-                                            <th class="text-dark" scope="col">Name Product</th>
-                                            <th class="text-dark" scope="col">Price</th>
+                                            <th class="text-dark" scope="col">Nama Product</th>
+                                            <th class="text-dark" scope="col">Harga</th>
                                             <th class="text-dark" scope="col">Stock</th>
                                             <th class="text-dark" scope="col"></th>
                                         </tr>
@@ -144,9 +144,9 @@
                                                                 <div
                                                                     class="d-flex align-items-center justify-content-center gap-3">
                                                                     <h6 class="mb-0 text-md">
-                                                                        Are you sure you want to delete this "<span
+                                                                        Apa anda yakin ingin menghapus product" <span
                                                                             class="text-danger">{{ $data->name }}</span>"
-                                                                        permanently?
+                                                                        secara permanen?
                                                                     </h6>
                                                                 </div>
                                                                 <div class="d-flex justify-content-end gap-2 pt-3 mt-3">

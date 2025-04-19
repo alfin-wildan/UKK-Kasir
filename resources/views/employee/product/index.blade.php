@@ -31,8 +31,8 @@
                                         <tr>
                                             <th class="text-dark text-center" scope="col">No</th>
                                             <th class="text-dark" scope="col"></th>
-                                            <th class="text-dark" scope="col">Name Product</th>
-                                            <th class="text-dark" scope="col">Price</th>
+                                            <th class="text-dark" scope="col">Nama Product</th>
+                                            <th class="text-dark" scope="col">Harga</th>
                                             <th class="text-dark text-center" scope="col">Stock</th>
                                         </tr>
                                     </thead>

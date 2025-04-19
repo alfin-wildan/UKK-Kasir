@@ -42,7 +42,7 @@
 
 
                             <div class="col-md-6">
-                                <label for="name" class="form-label">Product Name <span class="text-danger">*</span></label>
+                                <label for="name" class="form-label">Nama Product <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control"name="name" id="name" value="{{ $products->name }}">
                             </div>
                             <div class="col-md-6">

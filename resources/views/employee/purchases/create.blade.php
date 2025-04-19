@@ -13,12 +13,12 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="{{ route('employee.SaleIndex') }}" class="link">Purchase</a>
+                                <a href="{{ route('employee.SaleIndex') }}" class="link">Penjualan</a>
                             </li>
-                            <li class="breadcrumb-item active text-dark" aria-current="page">Add Purchase</li>
+                            <li class="breadcrumb-item active text-dark" aria-current="page">Tambah Penjualan</li>
                         </ol>
                     </nav>
-                    <h1 class="mb-0 fw-bold">Add Purchase</h1>
+                    <h1 class="mb-0 fw-bold">Tambah Penjualan</h1>
                 </div>
             </div>
         </div>
@@ -87,7 +87,7 @@
                     @method('POST')
                     <div id="hidden-inputs"></div>
                     <div class="fixed-bottom bg-white shadow p-3 border-top border-warning w-100 d-flex justify-content-center">
-                        <button class="btn btn-primary w-20">Next</button>
+                        <button class="btn btn-primary w-20">Selanjutnya</button>
                     </div>
                 </form>
 

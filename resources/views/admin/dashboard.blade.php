@@ -61,7 +61,7 @@
             type: 'column'
         },
         title: {
-            text: 'Last 30 Days Purchase'
+            text: '30 hari terakhir penjualan'
         },
         xAxis: {
             categories: categories,
@@ -77,7 +77,7 @@
         yAxis: {
             min: 0,
             title: {
-                text: 'Total Purchase'
+                text: 'Total Penjualan'
             }
         },
         tooltip: {
@@ -91,7 +91,7 @@
             }
         },
         series: [{
-            name: 'Date purchaase',
+            name: 'Tanggal Penjualan',
             data: data
         }]
     });
@@ -102,8 +102,9 @@
         chart: {
             type: 'pie'
         },
+        colors: ['#4CAF50','#547792','#FF9800','#F44336','#2196F3'], 
         title: {
-            text: 'Last 30 Days Purchase Product'
+            text: '30 hari terakhir penjualan product'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

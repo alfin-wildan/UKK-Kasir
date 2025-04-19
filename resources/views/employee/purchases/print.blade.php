@@ -13,13 +13,13 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('employee.SaleIndex') }}" class="link">Purchase</a>
+                            <a href="{{ route('employee.SaleIndex') }}" class="link">Penjualan</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('employee.SaleCreate') }}" class="link">Add Purchase</a>
+                            <a href="{{ route('employee.SaleCreate') }}" class="link">Tambah Penjualan</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('employee.SalePayment') }}" class="link">Payment</a>
+                            <a href="{{ route('employee.SalePayment') }}" class="link">Pembayaran</a>
                         </li>
                         <li class="breadcrumb-item active text-dark" aria-current="page">Invoice</li>
                     </ol>
@@ -97,10 +97,10 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                     <div class="custom-actions-btns mb-5">
                                         <a href="{{ route('employee.ExportPDF', $sale->id) }}" class="btn btn-primary">
-                                            <i class="icon-download"></i> Download
+                                            <i class="icon-download"></i> Unduh
                                         </a>
                                         <a href="{{ route('employee.SaleIndex') }}" class="btn btn-secondary">
-                                            <i class="icon-printer"></i> Back
+                                            <i class="icon-printer"></i> Kembali
                                         </a>
                                     </div>
                                 </div>
