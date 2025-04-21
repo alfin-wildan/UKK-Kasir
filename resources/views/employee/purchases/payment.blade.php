@@ -38,7 +38,7 @@
                                 <div class="col-lg-6 mb-3">
                                     <h4 class="fw-bold mb-4">Product yang dipilih</h4>
 
-                                    @foreach ($product as $item)
+                                    @foreach ($products as $item)
                                         <div class="d-flex justify-content-between align-items-start mt-2">
                                             <div>
                                                 <div class="fw-medium">{{ $item['name'] }}</div>

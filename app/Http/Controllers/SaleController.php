@@ -21,31 +21,41 @@ class SaleController extends Controller
 
      public function SaleIndex(Request $request)
      {
+         // Ambil filter dan tahun dari request
          $filter = $request->filter;
-
+         $year = $request->year ?? Carbon::now()->year; // Default ke tahun sekarang
+     
          $query = Sale::with(['customer', 'user']);
-
+     
+         // Filter untuk Daily (Hari ini)
          if ($filter === 'daily') {
-            $query->whereDate('sale_date', Carbon::now());
-        } elseif ($filter === 'weekly') {
-            $startOfWeek = Carbon::now()->startOfWeek(Carbon::MONDAY)->startOfDay();
-            $endOfWeek = Carbon::now()->endOfWeek(Carbon::SUNDAY)->endOfDay();
-            $query->whereBetween('sale_date', [$startOfWeek, $endOfWeek]);
-        } elseif ($filter === 'monthly') {
-            // Jika ada tahun yang dipilih, gunakan tahun itu, jika tidak, gunakan tahun saat ini
-            $year = request('year') ?? Carbon::now()->year;
-            $query->whereYear('sale_date', $year)
-                  ->whereMonth('sale_date', Carbon::now()->month);
-        } elseif ($filter === 'yearly') {
-            $query->whereYear('sale_date', Carbon::now()->year);
-        }
-        
-
+             $query->whereDate('sale_date', Carbon::today());
+         }
+         // Filter untuk Weekly (Minggu ini)
+         elseif ($filter === 'weekly') {
+             $startOfWeek = Carbon::now()->startOfWeek(Carbon::MONDAY)->startOfDay();
+             $endOfWeek = Carbon::now()->endOfWeek(Carbon::SUNDAY)->endOfDay();
+             $query->whereBetween('sale_date', [$startOfWeek, $endOfWeek]);
+         }
+         // Filter untuk Monthly (Bulan ini)
+         elseif ($filter === 'monthly') {
+            $month = Carbon::now()->month;
+            $query->whereMonth('sale_date', $month)
+                  ->whereYear('sale_date', $year); 
+         }
+         // Filter untuk Yearly (Tahun ini)
+         elseif ($filter === 'yearly') {
+             $query->whereYear('sale_date', $year);
+         }
+     
+         // Eksekusi query dan ambil data penjualan
          $sale = $query->get();
          $detail_sale = Detail_sale::with('product')->get();
-
-         return view('employee.purchases.index', compact('sale', 'detail_sale', 'filter'));
+     
+         // Kembalikan view dengan data yang sudah difilter
+         return view('employee.purchases.index', compact('sale', 'detail_sale', 'filter', 'year'));
      }
+     
 
     public function AdminIndex()
     {

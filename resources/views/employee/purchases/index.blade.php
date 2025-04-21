@@ -34,26 +34,39 @@
                                 {{-- <a class="btn btn-info text-white" href="{{ route('employee.Excel') }}">Export Penjualan (.xlsx)</a> --}}
 
                                 <form class="d-flex align-items-center mb-3" method="GET" action="{{ route('employee.SaleIndex') }}">
-    <select name="filter" class="form-select me-2" style="width: 200px">
-        <option value="">Pilih Filter Data </option>
+    {{-- Filter tipe waktu --}}
+    <select name="filter" class="form-select me-2" style="width: 200px" onchange="this.form.submit()">
+        <option value="">Pilih Filter Data</option>
         <option value="daily" {{ request('filter') == 'daily' ? 'selected' : '' }}>Hari ini</option>
         <option value="weekly" {{ request('filter') == 'weekly' ? 'selected' : '' }}>Minggu ini</option>
-        <option value="monthly" {{ request('filter') == 'monthly' ? 'selected' : '' }}>Bulan ini </option>
+        <option value="monthly" {{ request('filter') == 'monthly' ? 'selected' : '' }}>Bulan ini</option>
         <option value="yearly" {{ request('filter') == 'yearly' ? 'selected' : '' }}>Tahun ini</option>
     </select>
-    @if(request('filter') == 'monthly')
+
+    {{-- Dropdown tahun hanya muncul jika filter-nya monthly atau yearly --}}
+    @if(request('filter') == 'monthly' || request('filter') == 'yearly')
+        @php
+            $currentYear = now()->year;
+        @endphp
         <select name="year" class="form-select me-2" style="width: 200px">
-            <option value="{{ now()->year }}" {{ request('year') == now()->year ? 'selected' : '' }}>{{ now()->year }}</option>
-            <option value="{{ now()->year - 1 }}" {{ request('year') == (now()->year - 1) ? 'selected' : '' }}>{{ now()->year - 1 }}</option>
-            <option value="{{ now()->year + 1 }}" {{ request('year') == (now()->year + 1) ? 'selected' : '' }}>{{ now()->year + 1 }}</option>
+            @for ($i = $currentYear - 4; $i <= $currentYear + 1; $i++)
+                <option value="{{ $i }}" {{ request('year', $currentYear) == $i ? 'selected' : '' }}>
+                    {{ $i }}
+                </option>
+            @endfor
         </select>
     @endif
-    <button type="submit" class="btn btn-secondary me-2">Apply</button>
 
-    <button formaction="{{ route('employee.Excel') }}" type="submit" class="btn btn-info text-white">
+    <button type="submit" class="btn btn-secondary me-2">Apply</button>
+</form>
+
+
+<form method="GET" action="{{ route('employee.Excel') }}">
+    <button type="submit" class="btn btn-info text-white me-2">
         Export Penjualan (.xlsx)
     </button>
 </form>
+
 
 
                                 <div class="ms-auto">
@@ -75,36 +88,37 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if ($sale->count() > 0)
-                                            @foreach ($sale as $data)
-                                                <tr>
-                                                    <th class="text-center pointer" scope="row">{{ $loop->iteration }}</th>
-                                                    @if ($data->customer)
-                                                        <td class="text-start pointer">{{ $data->customer->name }}</td>
-                                                    @else
-                                                        <td class="text-start pointer">NON-MEMBER</td>
-                                                    @endif
-                                                    <td class="text-start pointer">{{ $data->sale_date }}</td>
-                                                    <td class="text-start pointer">Rp. {{ number_format($data->total_price, 0, ',' , '.') }}</td>
-                                                    <td class="text-start pointer">{{ $data->customer->name ?? 'NON-MEMBER' }}</td>
-                                                    <td class="justify-content-center">
-                                                        <button type="button" class="btn pointer btn-warning text-white"
-                                                            data-bs-toggle="modal" data-bs-target="#seeModal-{{ $data['id'] }}">
-                                                            Lihat
-                                                        </button>
-                                                        <a type="button" class="btn pointer btn-info text-white"
-                                                            href="{{ route('employee.ExportPDF', $data->id) }}">
-                                                            Unduh
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        @else
-                                            <tr>
-                                                <td colspan="6" class="text-center text-muted">No data available for this filter.</td>
-                                            </tr>
-                                        @endif
-                                    </tbody>
+    @if ($sale->count() > 0)
+        @foreach ($sale as $data)
+            <tr>
+                <th class="text-center pointer" scope="row">{{ $loop->iteration }}</th>
+                @if ($data->customer)
+                    <td class="text-start pointer">{{ $data->customer->name }}</td>
+                @else
+                    <td class="text-start pointer">NON-MEMBER</td>
+                @endif
+                <td class="text-start pointer">{{ $data->sale_date }}</td>
+                <td class="text-start pointer">Rp. {{ number_format($data->total_price, 0, ',' , '.') }}</td>
+                <td class="text-start pointer">{{ $data->user->name ?? '-' }}</td>
+                <td class="justify-content-center">
+                    <button type="button" class="btn pointer btn-warning text-white"
+                        data-bs-toggle="modal" data-bs-target="#seeModal-{{ $data['id'] }}">
+                        Lihat
+                    </button>
+                    <a type="button" class="btn pointer btn-info text-white"
+                        href="{{ route('employee.ExportPDF', $data->id) }}">
+                        Unduh
+                    </a>
+                </td>
+            </tr>
+        @endforeach
+    @else
+        <tr>
+            <td colspan="6" class="text-center text-muted">No data available for this filter.</td>
+        </tr>
+    @endif
+</tbody>
+
                                 </table>
 
                                 @foreach ($sale as $sales)
